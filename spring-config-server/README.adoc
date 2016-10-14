@@ -1,0 +1,52 @@
+= SpringBoot config server
+
+This server will have the following `bootstrap.yml` configuration file :
+
+```
+spring:  
+  application:
+      name: config-service
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/Baresse/config-repo.git
+          basedir: ./cloned
+          searchPaths: '{application}'
+          cloneOnStart: true
+
+security:
+  user:
+    name: admin
+    password: strongpassword
+    
+server:  
+  port: 8888
+```
+
+The backend is served by a Git repository : `https://github.com/Baresse/config-repo.git` and the 
+configuration will be cloned into the `./cloned` directory. 
+
+Each application will have the opportunity to deploy their configuration files under their own subdirectory.
+For instance the backend repository structure could be like this for a application named `app1`:
+ 
+```
+  --/
+   |
+   |- application.yml
+   |
+   -/app1
+    |
+    |- application.yml
+    |- application-pprd.yml
+    |- application-ctrl.yml
+    |- application-dev.yml
+    |
+   ...
+```
+
+== Security for some profiles
+
+In real life project the configuration server will not expose pre-production (pprd) or production configuration to unauthorized users or applications. 
+
+The provided server will protect any profile different from `ctrl` and `dev` using basic authentication. 

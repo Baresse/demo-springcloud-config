@@ -1,0 +1,23 @@
+= Spring Cloud Config in the real life
+
+The following projects illustrates how to Spring Cloud Config can be used to externalize the environment based properties from the project's delivery (ZIP, JAR, WAR, EAR, ...).
+
+== Spring Config Server
+This project implements the Spring Cloud Config server using a GIT backend.
+A simple Web security is implemented in order to illustrate how production properties can be protected from unauthorized users and applications.
+
+=> Read more about link:spring-config-server[Spring Config Server]
+
+
+== Spring Config Client
+This project implements a Cloud Config client using SpringBoot in order to illustrate how the integration can be done on the client side.
+We will notice that nothing no specific code is required to use Spring Cloud Server but a line of configuration in the `bootstrap.yml` file and a maven dependency in the `pom.xml`.
+
+=> Read more about link:spring-config-client[Spring Config Client]
+
+== Old Java main Config Client
+This project implements a Cloud Config client using Spring Cloud Config server's REST API in a plain old java application.
+We will notice that there is a little more work to do compared to the SpringBoot based client, but nothing too complex.
+The most important here, we illustrate how externalized configuration architecture can be used in any language able to consume REST services.
+
+=> Read more about link:old-main-config-client[Old main config client]

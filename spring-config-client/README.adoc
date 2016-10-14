@@ -1,0 +1,160 @@
+= SpringBoot config client
+
+== Start the application in local mode
+
+By default the application will try to retrieve configuration from the Config Server. 
+But during development process, it should be possible to develop without any Config Server and 
+just use local `application.properties`. To do that, we have to disable the Config Server in local environment with the following statement : 
+
+```
+ mvn -Dspring.cloud.config.enabled=false spring-boot:run
+```
+
+Note: If the Config Server is not available (because not started for instance), the Spring Config Client will 
+automatically fall back in local mode.
+
+== Start the application in dev mode
+
+with the following `bootstrap.yml` :
+```
+spring:  
+  application:
+    name: app1
+  cloud:
+    config:
+      uri: http://localhost:8888
+```
+
+```
+ mvn -Dspring.cloud.config.profile=dev spring-boot:run
+```
+or for the v2 
+```
+mvn -Dspring.cloud.config.profile=dev -Dspring.cloud.config.label=v2 spring-boot:run
+```
+
+The server will listen on port : 8000
+
+To access the Spring client: 
+
+ http://localhost:8000/
+
+To access the Spring client: 
+
+ http://localhost:8888/app1/dev
+ http://localhost:8888/app1-dev.properties
+ http://localhost:8888/app1-dev.yml
+
+or for the v2 
+ 
+ http://localhost:8888/app1/dev/v2
+ http://localhost:8888/v2/app1-dev.properties
+ http://localhost:8888/v2/app1-dev.yml
+ 
+
+== Start the application in CTRL mode
+
+```
+mvn -Dspring.cloud.config.profile=ctrl spring-boot:run
+```
+or for the v2 
+```
+mvn -Dspring.cloud.config.profile=ctrl -Dspring.cloud.config.label=v2 spring-boot:run
+```
+
+The server will listen on port : 8020
+
+To access the Spring client: 
+
+ http://localhost:8020/
+
+To access the corresponding configuration : 
+
+ http://localhost:8888/app1/ctrl
+ http://localhost:8888/app1-ctrl.properties
+ http://localhost:8888/app1-ctrl.yml
+
+or for the v2 
+ 
+ http://localhost:8888/app1/ctrl/v2
+ http://localhost:8888/v2/app1-ctrl.properties
+ http://localhost:8888/v2/app1-ctrl.yml
+ 
+== Start the application in PPRD mode
+
+For this profile, "admin" credentials must be provided to the application (for instance via Env parameter) by setting `spring.cloud.config.username` and `spring.cloud.config.password`
+
+```
+mvn -Dspring.cloud.config.profile=pprd -Dspring.cloud.config.username=admin -Dspring.cloud.config.password=strongpassword spring-boot:run
+```
+or for the v2 
+```
+mvn -Dspring.cloud.config.profile=pprd -Dspring.cloud.config.label=v2 -Dspring.cloud.config.username=admin -Dspring.cloud.config.password=strongpassword spring-boot:run
+```
+
+The server will listen on port : 8082
+
+To access the Spring client: 
+
+ http://localhost:8082/
+
+To access the Spring client: 
+
+ http://localhost:8888/app1/pprd
+ http://localhost:8888/app1-pprd.properties
+ http://localhost:8888/app1-pprd.yml
+ 
+or for the v2 
+ 
+ http://localhost:8888/app1/pprd/v2
+ http://localhost:8888/v2/app1-pprd.properties
+ http://localhost:8888/v2/app1-pprd.yml 
+
+== Start the application in production mode
+
+For this profile, "admin" credentials must be provided to the application (for instance via Env parameter) by setting `spring.cloud.config.username` and `spring.cloud.config.password`
+ 
+Simply run this command : 
+```
+mvn -Dspring.cloud.config.profile=production -Dspring.cloud.config.username=admin -Dspring.cloud.config.password=strongpassword spring-boot:run
+``` 
+or for the v2 
+```
+mvn -Dspring.cloud.config.profile=production  -Dspring.cloud.config.label=v2 -Dspring.cloud.config.username=admin -Dspring.cloud.config.password=strongpassword spring-boot:run
+```
+
+The server will listen on port : 8081
+
+To access the Spring client: 
+
+ http://localhost:8081/
+
+To access the Spring client: 
+
+ http://localhost:8888/app1/production
+ http://localhost:8888/app1-production.properties
+ http://localhost:8888/app1-production.yml
+ 
+or for the v2 
+ 
+ http://localhost:8888/app1/production/v2
+ http://localhost:8888/v2/app1-production.properties
+ http://localhost:8888/v2/app1-production.yml 
+
+== Refresh properties 
+
+Refresh scopes using actuator `refresh` endpoint should the configuration be updated while the client service is running. 
+
+```
+curl -d{} http://localhost:8000/refresh
+```
+
+== One package for all environments
+
+In order to create "one package for all environments", just create file `setenv.sh` in Tomcat's `bin` directory with the following content in order to set the required spring profile:
+
+```
+JAVA_OPTS="$JAVA_OPTS -Dspring.cloud.config.profile=pprd"
+```
+
+Note default profile is for `production` as a consequence nothing has to be done on production environment.
