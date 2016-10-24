@@ -44,12 +44,14 @@ To access the Spring client:
  http://localhost:8888/app1/dev
  http://localhost:8888/app1-dev.properties
  http://localhost:8888/app1-dev.yml
+ http://localhost:8888/app1-dev.json
 
 or for the v2 
  
  http://localhost:8888/app1/dev/v2
  http://localhost:8888/v2/app1-dev.properties
  http://localhost:8888/v2/app1-dev.yml
+ http://localhost:8888/v2/app1-dev.json
  
 
 == Start the application in CTRL mode
@@ -73,12 +75,14 @@ To access the corresponding configuration :
  http://localhost:8888/app1/ctrl
  http://localhost:8888/app1-ctrl.properties
  http://localhost:8888/app1-ctrl.yml
+ http://localhost:8888/app1-ctrl.json
 
 or for the v2 
  
  http://localhost:8888/app1/ctrl/v2
  http://localhost:8888/v2/app1-ctrl.properties
  http://localhost:8888/v2/app1-ctrl.yml
+ http://localhost:8888/v2/app1-ctrl.json
  
 == Start the application in PPRD mode
 
@@ -103,12 +107,14 @@ To access the Spring client:
  http://localhost:8888/app1/pprd
  http://localhost:8888/app1-pprd.properties
  http://localhost:8888/app1-pprd.yml
+ http://localhost:8888/app1-pprd.json
  
 or for the v2 
  
  http://localhost:8888/app1/pprd/v2
  http://localhost:8888/v2/app1-pprd.properties
  http://localhost:8888/v2/app1-pprd.yml 
+ http://localhost:8888/v2/app1-pprd.json 
 
 == Start the application in production mode
 
@@ -134,12 +140,14 @@ To access the Spring client:
  http://localhost:8888/app1/production
  http://localhost:8888/app1-production.properties
  http://localhost:8888/app1-production.yml
+ http://localhost:8888/app1-production.json
  
 or for the v2 
  
  http://localhost:8888/app1/production/v2
  http://localhost:8888/v2/app1-production.properties
  http://localhost:8888/v2/app1-production.yml 
+ http://localhost:8888/v2/app1-production.json 
 
 == Refresh properties 
 

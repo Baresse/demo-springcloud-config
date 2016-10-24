@@ -22,8 +22,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/**/dev", "/**/dev/*",  "/**/*-dev.properties", "/**/*-dev.yml").permitAll()
-                .antMatchers("/**/ctrl", "/**/ctrl/*", "/**/*-ctrl.properties", "/**/*-ctrl.yml").permitAll()
+                .antMatchers("/**/dev", "/**/dev/*",  "/**/*-dev.*").permitAll()
+                .antMatchers("/**/ctrl", "/**/ctrl/*", "/**/*-ctrl.*").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
