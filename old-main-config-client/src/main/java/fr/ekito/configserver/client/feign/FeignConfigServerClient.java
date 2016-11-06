@@ -1,7 +1,8 @@
-package fr.ekito.configserver.client;
+package fr.ekito.configserver.client.feign;
 
 import feign.Feign;
 import feign.auth.BasicAuthRequestInterceptor;
+import fr.ekito.configserver.client.IConfigServerClient;
 
 import java.io.IOException;
 import java.io.StringReader;

@@ -1,6 +1,6 @@
 package com.example;
 
-import fr.ekito.configserver.client.FeignConfigServerClient;
+import fr.ekito.configserver.client.feign.FeignConfigServerClient;
 import fr.ekito.configserver.client.IConfigServerClient;
 
 import java.util.Properties;

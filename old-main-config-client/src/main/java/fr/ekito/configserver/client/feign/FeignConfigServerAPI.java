@@ -1,4 +1,4 @@
-package fr.ekito.configserver.client;
+package fr.ekito.configserver.client.feign;
 
 import feign.Param;
 import feign.RequestLine;
