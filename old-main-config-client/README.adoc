@@ -15,88 +15,29 @@ java -jar ./target/old-main-config-client-0.0.1-SNAPSHOT.jar
 ```
 Will return:
 ```
+GET /app1-production.properties HTTP/1.1
+
+Fail to retrieve properties from server : status 401 reading FeignConfigServerAPI#getProperties(String,String); content:
+{"timestamp":1478423304934,"status":401,"error":"Unauthorized","message":"Full authentication is required to access this resource","path":"/app1-production.properties"}
  ************ Retrieve properties for profile = production ************ 
 	local.message = Hi from local definition (local value)
-    global.message = null
-    message = null
-    server.port = null
+	global.message = Hi from global definition (local value)
+	message = Hi from app1 definition (local value)
+	server.port = 8080
  ********************************************************************** 
 
- ************ Retrieve properties for profile = pprd ************ 
-    local.message = Hi from local definition (local value)
-    global.message = null
-    message = null
-    server.port = null
- ********************************************************************** 
+GET /app1-pprd.properties HTTP/1.1
 
- ************ Retrieve properties for profile = ctrl ************ 
-    local.message = Hi from local definition (local value)
-    global.message = Hi from global definition (ctrl value)
-    message = Hi from app1 definition (ctrl value)
-    server.port = 8020
- ********************************************************************** 
-
- ************ Retrieve properties for profile = dev ************ 
-    local.message = Hi from local definition (local value)
-    global.message = Hi from global definition (dev value)
-    message = Hi from app1 definition (dev value)
-    server.port = 8000
- ********************************************************************** 
-
- 
-
-************ Now let's fetch properties from v2 Git Branch ************
- 
- ************ Retrieve properties for profile = production (v2) ************ 
-    local.message = Hi from local definition (local value)
-    global.message = null
-    message = null
-    server.port = null
- ********************************************************************** 
-
- ************ Retrieve properties for profile = pprd (v2) ************ 
-    local.message = Hi from local definition (local value)
-    global.message = null
-    message = null
-    server.port = null
- ********************************************************************** 
-
- ************ Retrieve properties for profile = ctrl (v2) ************ 
-    local.message = Hi from local definition (local value)
-    global.message = Hi from global definition (ctrl V2 value)
-    message = Hi from app1 definition (ctrl V2 value)
-    server.port = 8020
- ********************************************************************** 
-
- ************ Retrieve properties for profile = dev (v2) ************ 
-    local.message = Hi from local definition (local value)
-    global.message = Hi from global definition (dev V2 value)
-    message = Hi from app1 definition (dev V2 value)
-    server.port = 8000
- ********************************************************************** 
-```
- 
-With proper "admin" credentials `pprd` and `default` (which is equivalent for us to production) are available:  
-
-```
-java -Dconfig.server.username=admin -Dconfig.server.password=strongpassword -jar ./target/old-main-config-client-0.0.1-SNAPSHOT.jar
-```
-
-Will return: 
-```
-************ Retrieve properties for profile = production ************ 
-	local.message = Hi from local definition (local value)
-	global.message = Hi from global definition (default value)
-	message = Hi from app1 definition (default value)
-	server.port = 8081
- ********************************************************************** 
-
+Fail to retrieve properties from server : status 401 reading FeignConfigServerAPI#getProperties(String,String); content:
+{"timestamp":1478423304948,"status":401,"error":"Unauthorized","message":"Full authentication is required to access this resource","path":"/app1-pprd.properties"}
  ************ Retrieve properties for profile = pprd ************ 
 	local.message = Hi from local definition (local value)
-	global.message = Hi from global definition (pprd value)
-	message = Hi from app1 definition (pprd value)
-	server.port = 8082
+	global.message = Hi from global definition (local value)
+	message = Hi from app1 definition (local value)
+	server.port = 8080
  ********************************************************************** 
+
+GET /app1-ctrl.properties HTTP/1.1
 
  ************ Retrieve properties for profile = ctrl ************ 
 	local.message = Hi from local definition (local value)
@@ -104,6 +45,8 @@ Will return:
 	message = Hi from app1 definition (ctrl value)
 	server.port = 8020
  ********************************************************************** 
+
+GET /app1-dev.properties HTTP/1.1
 
  ************ Retrieve properties for profile = dev ************ 
 	local.message = Hi from local definition (local value)
@@ -116,19 +59,29 @@ Will return:
 
 ************ Now let's fetch properties from v2 Git Branch ************
  
+GET /v2/app1-production.properties HTTP/1.1
+
+Fail to retrieve properties from server : status 401 reading FeignConfigServerAPI#getProperties(String,String,String); content:
+{"timestamp":1478423305912,"status":401,"error":"Unauthorized","message":"Full authentication is required to access this resource","path":"/v2/app1-production.properties"}
  ************ Retrieve properties for profile = production (v2) ************ 
 	local.message = Hi from local definition (local value)
-	global.message = Hi from global definition (default V2 value)
-	message = Hi from app1 definition (default V2 value)
-	server.port = 8081
+	global.message = Hi from global definition (local value)
+	message = Hi from app1 definition (local value)
+	server.port = 8080
  ********************************************************************** 
 
+GET /v2/app1-pprd.properties HTTP/1.1
+
+Fail to retrieve properties from server : status 401 reading FeignConfigServerAPI#getProperties(String,String,String); content:
+{"timestamp":1478423305916,"status":401,"error":"Unauthorized","message":"Full authentication is required to access this resource","path":"/v2/app1-pprd.properties"}
  ************ Retrieve properties for profile = pprd (v2) ************ 
 	local.message = Hi from local definition (local value)
-	global.message = Hi from global definition (pprd V2 value)
-	message = Hi from app1 definition (pprd V2 value)
-	server.port = 8082
+	global.message = Hi from global definition (local value)
+	message = Hi from app1 definition (local value)
+	server.port = 8080
  ********************************************************************** 
+
+GET /v2/app1-ctrl.properties HTTP/1.1
 
  ************ Retrieve properties for profile = ctrl (v2) ************ 
 	local.message = Hi from local definition (local value)
@@ -137,10 +90,106 @@ Will return:
 	server.port = 8020
  ********************************************************************** 
 
+GET /v2/app1-dev.properties HTTP/1.1
+
  ************ Retrieve properties for profile = dev (v2) ************ 
 	local.message = Hi from local definition (local value)
 	global.message = Hi from global definition (dev V2 value)
 	message = Hi from app1 definition (dev V2 value)
 	server.port = 8000
  ********************************************************************** 
+```
+ 
+With proper "admin" credentials `pprd` and `default` (which is equivalent for us to production) are available:  
+
+```
+java -Dconfig.server.username=admin -Dconfig.server.password=strongpassword -jar ./target/old-main-config-client-0.0.1-SNAPSHOT.jar
+```
+
+Will return: 
+```
+GET /app1-production.properties HTTP/1.1
+Authorization: Basic YWRtaW46c3Ryb25ncGFzc3dvcmQ=
+
+ ************ Retrieve properties for profile = production ************ 
+	local.message = Hi from local definition (local value)
+	global.message = Hi from global definition (default value)
+	message = Hi from app1 definition (default value)
+	server.port = 8081
+ ********************************************************************** 
+
+GET /app1-pprd.properties HTTP/1.1
+Authorization: Basic YWRtaW46c3Ryb25ncGFzc3dvcmQ=
+
+ ************ Retrieve properties for profile = pprd ************ 
+	local.message = Hi from local definition (local value)
+	global.message = Hi from global definition (pprd value)
+	message = Hi from app1 definition (pprd value)
+	server.port = 8082
+ ********************************************************************** 
+
+GET /app1-ctrl.properties HTTP/1.1
+Authorization: Basic YWRtaW46c3Ryb25ncGFzc3dvcmQ=
+
+ ************ Retrieve properties for profile = ctrl ************ 
+	local.message = Hi from local definition (local value)
+	global.message = Hi from global definition (ctrl value)
+	message = Hi from app1 definition (ctrl value)
+	server.port = 8020
+ ********************************************************************** 
+
+GET /app1-dev.properties HTTP/1.1
+Authorization: Basic YWRtaW46c3Ryb25ncGFzc3dvcmQ=
+
+ ************ Retrieve properties for profile = dev ************ 
+	local.message = Hi from local definition (local value)
+	global.message = Hi from global definition (dev value)
+	message = Hi from app1 definition (dev value)
+	server.port = 8000
+ ********************************************************************** 
+
+ 
+
+************ Now let's fetch properties from v2 Git Branch ************
+ 
+GET /v2/app1-production.properties HTTP/1.1
+Authorization: Basic YWRtaW46c3Ryb25ncGFzc3dvcmQ=
+
+ ************ Retrieve properties for profile = production (v2) ************ 
+	local.message = Hi from local definition (local value)
+	global.message = Hi from global definition (default V2 value)
+	message = Hi from app1 definition (default V2 value)
+	server.port = 8081
+ ********************************************************************** 
+
+GET /v2/app1-pprd.properties HTTP/1.1
+Authorization: Basic YWRtaW46c3Ryb25ncGFzc3dvcmQ=
+
+ ************ Retrieve properties for profile = pprd (v2) ************ 
+	local.message = Hi from local definition (local value)
+	global.message = Hi from global definition (pprd V2 value)
+	message = Hi from app1 definition (pprd V2 value)
+	server.port = 8082
+ ********************************************************************** 
+
+GET /v2/app1-ctrl.properties HTTP/1.1
+Authorization: Basic YWRtaW46c3Ryb25ncGFzc3dvcmQ=
+
+ ************ Retrieve properties for profile = ctrl (v2) ************ 
+	local.message = Hi from local definition (local value)
+	global.message = Hi from global definition (ctrl V2 value)
+	message = Hi from app1 definition (ctrl V2 value)
+	server.port = 8020
+ ********************************************************************** 
+
+GET /v2/app1-dev.properties HTTP/1.1
+Authorization: Basic YWRtaW46c3Ryb25ncGFzc3dvcmQ=
+
+ ************ Retrieve properties for profile = dev (v2) ************ 
+	local.message = Hi from local definition (local value)
+	global.message = Hi from global definition (dev V2 value)
+	message = Hi from app1 definition (dev V2 value)
+	server.port = 8000
+ ********************************************************************** 
+
 ```

@@ -3,6 +3,7 @@ package com.example;
 import fr.ekito.configserver.client.feign.FeignConfigServerClient;
 import fr.ekito.configserver.client.IConfigServerClient;
 
+import java.util.MissingResourceException;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -29,8 +30,12 @@ public class ConfigReader {
 
         // First, try to retrieve properties from the configuration server
         if (configServerUrl != null && appName != null) {
-            IConfigServerClient client = new FeignConfigServerClient(configServerUrl, username, password);
-            properties = client.getPropertiesFromConfigServer(appName, profile, label);
+            try {
+                IConfigServerClient client = new FeignConfigServerClient(configServerUrl, username, password);
+                properties = client.getPropertiesFromConfigServer(appName, profile, label);
+            } catch (Exception e) {
+                System.out.println("Fail to retrieve properties from server : " + e.getMessage());
+            }
         }
 
         // Then, add ResourceBundle properties if not already defined in the returned Properties to the result to be returned.
