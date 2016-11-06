@@ -65,7 +65,9 @@ public class ConfigReader {
     private static String getProperty(String key, ResourceBundle rb) {
         String property = System.getProperty(key);
         if (property == null) {
-            property = rb.getString(key);
+            try {
+                property = rb.getString(key);
+            } catch (MissingResourceException ignored) {}
         }
         return property;
     }
